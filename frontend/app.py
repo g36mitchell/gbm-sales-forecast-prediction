@@ -53,5 +53,10 @@ input_data = pd.DataFrame([{
 
 # Make Prediction when Predict button is selected
 if st.button("Predict", type="primary"):
-  st.success("Frontend test successful: the button is working.")
+  try:
+    response = requests.get(f"{BACKEND_URL}/", timeout=10)
+    response.raise_for_status()
+    st.success(f"Backend response: {response.text}")
+  except requests.RequestException as error:
+    st.error(f"Could not connect to the backend: {error}")
 
