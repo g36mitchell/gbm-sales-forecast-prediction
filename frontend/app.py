@@ -1,9 +1,10 @@
 import streamlit as st
 import pandas as pd
 import requests
+import os
 
 # BaseUrl for the backend APIs
-BACKEND_URL = "http://backend:7860"
+BACKEND_URL = os.getenv("BACKEND_URL", "http://backend:7860").rstrip("/")
 
 # Set the title of the application
 st.title("SuperKart Sales Prediction")
@@ -52,5 +53,5 @@ input_data = pd.DataFrame([{
 
 # Make Prediction when Predict button is selected
 if st.button("Predict", type="primary"):
-     st.success("button clicked!")
+  st.success("Frontend test successful: the button is working.")
 
