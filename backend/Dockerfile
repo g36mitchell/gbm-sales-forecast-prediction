@@ -10,4 +10,4 @@ COPY backend/superkart_model.joblib .
 
 EXPOSE 7860
 
-CMD ["gunicorn", "-w", "4", "-k", "uvicorn.workers.UvicornWorker", "app:sales_prediction_api", "--bind", "0.0.0.0:7860"]
+CMD ["gunicorn", "-w", "4", "app:sales_prediction_api", "--bind", "0.0.0.0:7860"]
