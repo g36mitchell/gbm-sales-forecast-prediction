@@ -50,3 +50,24 @@ def predict_sales_forecast():
 
     # Return the predicted sales forecast
     return jsonify({'Predicted sales forecast (in dollars)': predicted_sales_forecast})
+
+# Define an endpoint for batch sales forecasts (POST request)
+@sales_prediction_api.post('/v1/predict_batch')
+def predict_sales_forecast_batch():
+    """
+    This function handles POST requests to the '/v1/predict_batch' endpoint.
+    It expects a CSV payload containing a list of product details and returns
+    the predicted sales forecasts for each product as a JSON response.
+    """
+    # Get the uploaded CSV file from the request
+    file = request.files['file']
+    
+    # Get the CSV data from the request body
+    input_data = pd.read_csv(file)
+
+    # Make predictions for the batch of products
+    predicted_sales_forecasts = model.predict(input_data).tolist()
+
+
+    # Return the predicted sales forecasts as a list
+    return predicted_sales_forecasts
