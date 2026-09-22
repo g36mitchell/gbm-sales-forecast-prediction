@@ -60,3 +60,19 @@ if st.button("Predict", type="primary"):
   except requests.RequestException as error:
     st.error(f"Could not connect to the backend: {error}")
 
+# Make Prediction when Predict button is selected
+st.subheader("Batch prediction")
+
+if st.button("Predict", type="primary"):
+  st.success("Frontend test successful: the button is working.")
+
+file = st.file_uploader("Upload CSV file", type=["csv"])
+if file is not None:
+    if st.button("Predict for Batch", type='primary'):
+        response = requests.post(f"{BACKEND_URL}/", files={"file": file})    # enter user name and space name" before running the cell
+        if response.status_code == 200:
+            result = response.json()["predictions"]
+            st.header("Batch Prediction Results")
+            st.write(result)
+        else:
+            st.error("Error in API request")
