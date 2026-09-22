@@ -70,4 +70,4 @@ def predict_sales_forecast_batch():
 
 
     # Return the predicted sales forecasts as a list
-    return predicted_sales_forecasts
+    return jsonify({'predictions': predicted_sales_forecasts})
